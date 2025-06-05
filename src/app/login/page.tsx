@@ -22,7 +22,7 @@ export default function Login() {
         <span className="leading-[160%] text-gray-200">
           Faça seu login ou acesse como visitante.
         </span>
-        <AuthButtons />
+        <AuthButtons canGuest />
       </section>
     </div>
   )

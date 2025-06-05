@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 import { ComponentProps, ReactNode } from 'react'
@@ -11,6 +12,7 @@ type LinkCustomProps = Omit<ComponentProps<typeof Link>, 'href'> & {
 }
 
 export function LinkCustom({
+  className,
   href,
   text,
   icon,
@@ -20,7 +22,10 @@ export function LinkCustom({
 }: LinkCustomProps) {
   return (
     <Link
-      className="flex items-center gap-2 px-2 py-1 text-sm font-bold text-purple-300"
+      className={cn(
+        'flex items-center gap-2 px-2 py-1 text-sm font-bold text-purple-300',
+        className,
+      )}
       href={href}
       {...props}
     >

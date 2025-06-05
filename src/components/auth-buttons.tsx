@@ -25,7 +25,10 @@ export function AuthButtons({ callbackUrl = '/', canGuest }: AuthButtonsProps) {
   const hasAuthError = !!searchParams.get('error')
   return (
     <section className="mt-10 flex flex-col gap-4">
-      <button className="flex h-18 w-full cursor-pointer items-center rounded-lg border-none bg-gray-800 px-6 text-lg font-bold text-gray-200 hover:bg-gray-700">
+      <button
+        onClick={() => handleSignIn('google')}
+        className="flex h-18 w-full cursor-pointer items-center rounded-lg border-none bg-gray-800 px-6 text-lg font-bold text-gray-200 hover:bg-gray-700"
+      >
         <Image
           className="mr-5"
           src="/images/icons/google-icon.svg"
@@ -49,16 +52,22 @@ export function AuthButtons({ callbackUrl = '/', canGuest }: AuthButtonsProps) {
         />
         Entrar com Github
       </button>
-      <button className="flex h-18 w-full cursor-pointer items-center rounded-lg border-none bg-gray-800 px-6 text-lg font-bold text-gray-200 hover:bg-gray-700">
-        <Image
-          className="mr-5"
-          src="/images/icons/RocketLaunch.svg"
-          height={32}
-          width={32}
-          alt="rocket icon"
-        />
-        Entrar como visitante
-      </button>
+
+      {canGuest && (
+        <button
+          onClick={() => handleSignIn()}
+          className="flex h-18 w-full cursor-pointer items-center rounded-lg border-none bg-gray-800 px-6 text-lg font-bold text-gray-200 hover:bg-gray-700"
+        >
+          <Image
+            className="mr-5"
+            src="/images/icons/RocketLaunch.svg"
+            height={32}
+            width={32}
+            alt="rocket icon"
+          />
+          Entrar como visitante
+        </button>
+      )}
     </section>
   )
 }

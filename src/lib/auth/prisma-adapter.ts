@@ -8,14 +8,14 @@ export function PrismaAdapter(): Adapter {
       const createdUser = await prisma.user.create({
         data: {
           name: user.name,
-          avatar_url: user.avatar_url,
+          avatar_url: user.image || user.avatar_url,
           email: user.email,
         },
       })
 
       return {
         ...createdUser,
-        avatar_url: createdUser.avatar_url!,
+        image: createdUser.avatar_url || null,
         emailVerified: null,
       }
     },
@@ -31,7 +31,7 @@ export function PrismaAdapter(): Adapter {
 
       return {
         ...user,
-        avatar_url: user.avatar_url!,
+        image: user.avatar_url!,
         emailVerified: null,
       }
     },
@@ -47,7 +47,7 @@ export function PrismaAdapter(): Adapter {
 
       return {
         ...user,
-        avatar_url: user.avatar_url!,
+        image: user.avatar_url!,
         emailVerified: null,
       }
     },
@@ -84,13 +84,13 @@ export function PrismaAdapter(): Adapter {
         data: {
           name: user.name,
           email: user.email,
-          avatar_url: user.avatar_url,
+          avatar_url: (user as any).avatar_url,
         },
       })
 
       return {
         ...updatedUser,
-        avatar_url: updatedUser.avatar_url!,
+        image: updatedUser.avatar_url!,
         emailVerified: null,
       }
     },
@@ -153,7 +153,7 @@ export function PrismaAdapter(): Adapter {
           id: user.id,
           name: user.name,
           email: user.email!,
-          avatar_url: user.avatar_url!,
+          image: user.avatar_url ?? null,
           emailVerified: null,
         },
       }

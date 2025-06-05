@@ -7,7 +7,7 @@ import {
 } from '@phosphor-icons/react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 
 const NAV_ITEMS = [
@@ -26,9 +26,19 @@ const NAV_ITEMS = [
 export function Navigation() {
   const pathname = usePathname()
 
+  const { data: session } = useSession()
+
   const navItems = useMemo(() => {
+    if (session) {
+      return NAV_ITEMS.concat({
+        label: 'Perfil',
+        href: `/profile/${session.user.id}`,
+        icon: <UserIcon size={24} />,
+      })
+    }
     return NAV_ITEMS
-  }, [])
+  }, [session])
+
   return (
     <nav className="flex flex-col gap-7">
       {navItems.map(({ href, label, icon }) => (

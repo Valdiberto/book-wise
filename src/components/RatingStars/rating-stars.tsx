@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { StarIcon } from '@phosphor-icons/react'
 import { ComponentProps, useState } from 'react'
 import { tv } from 'tailwind-variants'
@@ -13,7 +14,7 @@ const ratestars = tv({
   variants: {
     size: {
       sm: 'w-3.5 h-3.5 px-[2px]',
-      md: 'w-5 h-5 px-[3px]',
+      md: 'w-5 h-5 px-[1px]',
       lg: 'w-6 h-6 px-[2px]',
     },
   },
@@ -46,7 +47,7 @@ export function RatingStars({
   }
 
   return (
-    <div className="flex items-center" {...props}>
+    <div className={cn('flex items-center')} {...props}>
       {Array.from({ length: 5 }).map((_, i) => (
         <StarIcon
           key={`star-${i}`}
