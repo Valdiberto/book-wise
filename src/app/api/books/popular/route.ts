@@ -1,12 +1,18 @@
 import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
-type BookWithRatings = Prisma.BookGetPayload<{
-  include: {
-    ratings: true
-  }
-}>
+type BookWithRatings = Awaited<
+  ReturnType<typeof prisma.book.findMany>
+>[number] & {
+  ratings: {
+    id: string
+    rate: number
+    description: string
+    created_at: Date
+    book_id: string
+    user_id: string
+  }[]
+}
 
 export async function GET() {
   try {
