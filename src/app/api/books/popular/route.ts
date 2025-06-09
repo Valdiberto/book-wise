@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
+type BookWithRatings = Awaited<ReturnType<typeof prisma.book.findMany>>[number]
 export async function GET() {
   try {
     const books = await prisma.book.findMany({
@@ -18,13 +19,12 @@ export async function GET() {
     if (!books.length) {
       return NextResponse.json({ error: 'books not found' }, { status: 404 })
     }
-    type BookWithRatings = (typeof books)[number]
-    const booksTyped: BookWithRatings[] = books
+
     const booksAvgRating = await prisma.rating.groupBy({
       by: ['book_id'],
       where: {
         book_id: {
-          in: booksTyped.map((book) => book.id),
+          in: books.map((book: BookWithRatings) => book.id),
         },
       },
       _avg: {
@@ -32,7 +32,7 @@ export async function GET() {
       },
     })
 
-    const booksWithAvgRating = books.map((book) => {
+    const booksWithAvgRating = books.map((book: BookWithRatings) => {
       const bookAvgRating = booksAvgRating.find(
         (avgRating) => avgRating.book_id === book.id,
       )
