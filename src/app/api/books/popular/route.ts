@@ -19,7 +19,7 @@ export async function GET() {
     if (!books.length) {
       return NextResponse.json({ error: 'books not found' }, { status: 404 })
     }
-    type BookWithRatings = Prisma.BookGetPayload<{ include: { ratings: true } }>
+    type BookWithRatings = (typeof books)[number]
     const booksTyped: BookWithRatings[] = books
     const booksAvgRating = await prisma.rating.groupBy({
       by: ['book_id'],
