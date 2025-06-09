@@ -1,7 +1,11 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
-type BookWithRatings = Awaited<ReturnType<typeof prisma.book.findMany>>[number]
+type BookWithRatings = Awaited<
+  ReturnType<typeof prisma.book.findMany>
+>[number] & {
+  ratings: any[] // Você pode substituir 'any' por um tipo mais específico se tiver
+}
 
 export async function GET() {
   try {
@@ -25,7 +29,7 @@ export async function GET() {
       by: ['book_id'],
       where: {
         book_id: {
-          in: books.map((book) => book.id),
+          in: books.map((book: BookWithRatings) => book.id),
         },
       },
       _avg: {
