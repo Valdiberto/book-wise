@@ -6,9 +6,13 @@ import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { api } from '@/lib/axios'
 import { BinocularsIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
-import { Category } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+
+type Category = {
+  id: string
+  name: string
+}
 
 export function ExploreClient() {
   const [search, setSearch] = useState('')
