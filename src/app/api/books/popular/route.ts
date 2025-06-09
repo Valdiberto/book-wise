@@ -1,10 +1,11 @@
 import { prisma } from '@/lib/prisma'
+import { Rating } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
 type BookWithRatings = Awaited<
   ReturnType<typeof prisma.book.findMany>
 >[number] & {
-  ratings: any[] // Você pode substituir 'any' por um tipo mais específico se tiver
+  ratings: Rating[] // Você pode substituir 'any' por um tipo mais específico se tiver
 }
 
 export async function GET() {
