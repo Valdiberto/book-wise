@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma'
+import { Prisma } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -18,12 +19,13 @@ export async function GET() {
     if (!books.length) {
       return NextResponse.json({ error: 'books not found' }, { status: 404 })
     }
-
+    type BookWithRatings = Prisma.BookGetPayload<{ include: { ratings: true } }>
+    const booksTyped: BookWithRatings[] = books
     const booksAvgRating = await prisma.rating.groupBy({
       by: ['book_id'],
       where: {
         book_id: {
-          in: books.map((book) => book.id),
+          in: booksTyped.map((book) => book.id),
         },
       },
       _avg: {
