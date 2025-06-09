@@ -37,7 +37,7 @@ export function LatestReviews() {
   const ratings = ratingsData || []
 
   return (
-    <div className="flex h-full w-full flex-col overflow-y-auto pb-10">
+    <div className="mt-5 flex h-full w-full flex-col overflow-y-auto pb-10 lg:mt-0">
       <PageTitle title="Início" icon={<ChartLineUpIcon size={32} />} />
       {latestUserRating && (
         <div className="mt-8 mb-10 flex flex-col">

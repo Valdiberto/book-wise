@@ -16,7 +16,7 @@ export function ProfileDetails({ profile }: ProfileDetailsProps) {
   const memberSinceYear = new Date(profile.user.member_since).getFullYear()
 
   return (
-    <div className="mt-18 flex h-max w-full flex-col items-center border-l border-gray-700/80">
+    <div className="flex flex-col items-center lg:mt-18 lg:h-max lg:w-full lg:border-l lg:border-gray-700/80">
       <div className="flex flex-col items-center">
         <Avatar
           size="lg"

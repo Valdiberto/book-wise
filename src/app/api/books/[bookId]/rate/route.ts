@@ -4,18 +4,18 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 
 import { authOptions } from '@/lib/auth/auth'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(
-  req: Request,
-  { params }: { params: { bookId: string } },
-) {
+  req: NextRequest,
+  context: { params: Promise<{ bookId: string }> },
+): Promise<NextResponse> {
   const session = await getServerSession(authOptions)
 
   if (!session) return NextResponse.json({ status: 401 })
 
   try {
-    const bookId = params.bookId
+    const { bookId } = await context.params
     const userId = String(session?.user?.id)
 
     const body = await req.json()

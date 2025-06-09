@@ -43,20 +43,20 @@ export function ExploreClient() {
   })
   return (
     <div className="flex w-full flex-col">
-      <header className="mb-10 flex justify-between">
+      <header className="mt-5 mb-10 flex flex-col justify-between space-y-5 lg:mt-0 lg:flex-row">
         <PageTitle title="Explorar" icon={<BinocularsIcon size={32} />} />
         <Input
           value={search}
           onChange={({ target }) => setSearch(target.value)}
           placeholder="Buscar livro ou autor"
-          className="max-w-108"
+          className="lg:max-w-108"
           icon={<MagnifyingGlassIcon size={20} />}
         />
       </header>
 
-      <div className="mb-12 flex gap-3">
+      <div className="flex gap-3 lg:mb-12">
         <Tabs defaultValue="tudo">
-          <TabsList className="flex-wrap">
+          <TabsList className="mb-22 flex-wrap lg:mb-0">
             <TabsTrigger value="tudo" onClick={() => setSelectedCategory(null)}>
               Tudo
             </TabsTrigger>
@@ -74,7 +74,7 @@ export function ExploreClient() {
         </Tabs>
       </div>
 
-      <div className="mt-12 grid h-full auto-rows-[188px] grid-cols-3 gap-5 overflow-y-auto pb-10">
+      <div className="mt-12 flex h-full auto-rows-[188px] flex-col gap-5 overflow-y-auto pb-10 lg:grid lg:grid-cols-3">
         {filteredBooks?.map((book) => (
           <BookCard key={book.id} book={book} size="lg" />
         ))}

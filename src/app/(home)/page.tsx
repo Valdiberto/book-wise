@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <section className="grid grid-cols-[1fr_308px] gap-16 overflow-hidden text-gray-50">
+    <section className="gap-16 overflow-hidden text-gray-50 lg:grid lg:grid-cols-[1fr_308px]">
       <LatestReviews />
       <PopularBooks />
     </section>

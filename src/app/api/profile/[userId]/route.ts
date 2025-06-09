@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server'
 
 export async function GET(
   request: Request,
-  { params }: { params: { userId: string } },
+  context: { params: Promise<{ userId: string }> },
 ) {
   try {
-    const userId = params.userId
+    const { userId } = await context.params
     console.log('user id log', userId)
 
     if (!userId) {

@@ -7,9 +7,9 @@ interface DefaultLayoutProps {
 
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
-    <div className="grid h-screen w-full grid-cols-[auto_1fr]">
+    <div className="mx-2 flex h-screen flex-col lg:ml-0 lg:grid lg:w-full lg:grid-cols-[auto_1fr]">
       <Sidebar />
-      <main className="scrollbar-hide m-[0_auto] h-screen w-full max-w-249 touch-pan-y overflow-y-auto pt-18">
+      <main className="scrollbar-hide h-screen max-w-249 touch-pan-y overflow-y-auto lg:m-[0_auto] lg:w-full lg:pt-18">
         {children}
       </main>
     </div>

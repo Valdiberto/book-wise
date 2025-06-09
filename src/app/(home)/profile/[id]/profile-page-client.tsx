@@ -50,7 +50,7 @@ export function ProfilePageClient() {
   }
 
   return (
-    <div className="grid h-full grid-cols-[1fr_308px] gap-16 overflow-hidden">
+    <div className="flex flex-col gap-16 lg:grid lg:h-full lg:grid-cols-[1fr_308px] lg:overflow-hidden">
       {profile ? (
         <>
           <ProfileRatings

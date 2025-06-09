@@ -40,7 +40,7 @@ export function Navigation() {
   }, [session])
 
   return (
-    <nav className="flex flex-col gap-7">
+    <nav className="mt-4 ml-4 flex flex-col lg:mt-0 lg:ml-0 lg:gap-7">
       {navItems.map(({ href, label, icon }) => (
         <Link
           href={href}

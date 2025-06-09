@@ -1,21 +1,35 @@
-import { Adapter } from 'next-auth/adapters'
+import { Adapter, AdapterUser } from 'next-auth/adapters'
 
 import { prisma } from '../prisma'
 
+interface LinkAccountParams {
+  userId: string
+  type: string
+  provider: string
+  providerAccountId: string
+  refresh_token?: string | null
+  access_token?: string | null
+  expires_at?: number | null
+  token_type?: string | null
+  scope?: string | null
+  id_token?: string | null
+  session_state?: string | null
+}
+
 export function PrismaAdapter(): Adapter {
   return {
-    async createUser(user) {
+    async createUser(user: AdapterUser): Promise<AdapterUser> {
       const createdUser = await prisma.user.create({
         data: {
-          name: user.name,
-          avatar_url: user.image || user.avatar_url,
+          name: user.name ?? '',
+          avatar_url: user.image || null,
           email: user.email,
         },
       })
 
       return {
         ...createdUser,
-        image: createdUser.avatar_url || null,
+        image: createdUser.avatar_url || undefined,
         emailVerified: null,
       }
     },
@@ -76,15 +90,17 @@ export function PrismaAdapter(): Adapter {
       }
     },
 
-    async updateUser(user) {
+    async updateUser(
+      user: Partial<AdapterUser> & Pick<AdapterUser, 'id'>,
+    ): Promise<AdapterUser> {
       const updatedUser = await prisma.user.update({
         where: {
           id: user.id,
         },
         data: {
-          name: user.name,
-          email: user.email,
-          avatar_url: (user as any).avatar_url,
+          name: user.name ?? '',
+          email: user.email ?? undefined,
+          avatar_url: user.image ?? null,
         },
       })
 
@@ -95,7 +111,7 @@ export function PrismaAdapter(): Adapter {
       }
     },
 
-    async linkAccount(account) {
+    async linkAccount(account: LinkAccountParams): Promise<void> {
       await prisma.account.create({
         data: {
           user_id: account.userId,
@@ -153,7 +169,7 @@ export function PrismaAdapter(): Adapter {
           id: user.id,
           name: user.name,
           email: user.email!,
-          image: user.avatar_url ?? null,
+          image: user.avatar_url ?? undefined,
           emailVerified: null,
         },
       }

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 export const useToggleShowMore = (text: string, maxLength: number) => {
-  const safeText = text || '' // Garante que text nunca seja undefined
+  const safeText = text || ''
   const [showMore, setShowMore] = useState(safeText.length <= maxLength)
 
   const toggleShowMore = () => setShowMore((state) => !state)

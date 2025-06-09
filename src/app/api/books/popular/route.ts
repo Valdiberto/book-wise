@@ -35,7 +35,7 @@ export async function GET() {
       const bookAvgRating = booksAvgRating.find(
         (avgRating) => avgRating.book_id === book.id,
       )
-      const { ratings, ...bookInfo } = book
+      const { /* ratings, */ ...bookInfo } = book
       return {
         ...bookInfo,
         avgRating: bookAvgRating?._avg.rate,

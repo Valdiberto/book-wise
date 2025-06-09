@@ -6,7 +6,6 @@ import { ReactNode, useState } from 'react'
 import { BookmarkSimpleIcon, BookOpenIcon, XIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
-import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { RatingStars } from '../RatingStars/rating-stars'
@@ -30,7 +29,6 @@ type RatingDialogProps = {
 
 export function RatingsDialog({ bookId, children }: RatingDialogProps) {
   const [open, setOpen] = useState(false)
-  const router = useRouter()
 
   const { data: bookData } = useQuery<BookDetails>({
     queryKey: ['book', bookId],
@@ -48,11 +46,6 @@ export function RatingsDialog({ bookId, children }: RatingDialogProps) {
     book?.categories?.map((X) => X?.category?.name)?.join(', ') ?? ''
 
   const onOpenChange = (open: boolean) => {
-    if (open) {
-      router.push(`/explore?book=${bookId}`)
-    } else {
-      router.push('/explore')
-    }
     setOpen(open)
   }
 
@@ -70,7 +63,7 @@ export function RatingsDialog({ bookId, children }: RatingDialogProps) {
         <Dialog.Content
           className={cn(
             'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 duration-200',
-            'fixed top-0 right-0 flex h-full w-165 flex-col overflow-y-auto bg-gray-900 px-12 py-6 shadow-[-4px_0px_30px_0px_#00000080]',
+            'fixed top-0 right-0 flex h-full flex-col overflow-y-auto bg-gray-900 px-3 py-2 shadow-[-4px_0px_30px_0px_#00000080] lg:w-165 lg:px-12 lg:py-6',
           )}
         >
           <Dialog.Title></Dialog.Title>
@@ -88,11 +81,11 @@ export function RatingsDialog({ bookId, children }: RatingDialogProps) {
                   src={book?.cover_url}
                   width={172}
                   height={242}
-                  className="min-w-42.75 rounded-md object-cover"
+                  className="rounded-md object-cover lg:min-w-42.75"
                 />
                 <div className="flex flex-col justify-between">
                   <div>
-                    <h1 className="text-lg font-bold text-gray-100">
+                    <h1 className="line-clamp-3 text-lg font-bold text-gray-100">
                       {book.name}
                     </h1>
                     <p className="mt-2 text-gray-300">{book.author}</p>

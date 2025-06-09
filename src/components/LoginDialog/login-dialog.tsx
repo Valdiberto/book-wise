@@ -26,7 +26,7 @@ export function LoginDialog({ children }: LoginDialogProps) {
         <Dialog.Content
           className={cn(
             'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 duration-200',
-            'fixed top-[50%] left-[50%] max-w-129 transform-[translate(-50%,_-50%)] rounded-xl bg-gray-900 px-18 py-14 shadow-[-4px_0px_30px_0px_#00000040]',
+            'o fixed top-[50%] left-[50%] w-80 max-w-129 transform-[translate(-50%,_-50%)] rounded-xl bg-gray-900 px-5 py-12 shadow-[-4px_0px_30px_0px_#00000040] lg:w-auto lg:px-18 lg:py-14',
           )}
         >
           <Dialog.Title></Dialog.Title>

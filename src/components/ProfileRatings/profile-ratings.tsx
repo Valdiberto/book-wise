@@ -36,16 +36,16 @@ export function ProfileRatings({ ratings, isOwnProfile }: ProfileRatingsProps) {
   }, [ratings, search])
 
   return (
-    <div className="scrollbar-hide flex h-full w-full flex-col overflow-y-auto pb-10">
+    <div className="scrollbar-hide flex flex-col overflow-y-auto pb-10 lg:h-full lg:w-full">
       {isOwnProfile ? (
         <PageTitle
-          className="mb-5"
+          className="mt-2 mb-2 lg:mt-0 lg:mb-5"
           title="Perfil"
-          icon={<UserIcon className="mb-5" size={25} />}
+          icon={<UserIcon className="mt-2 mb-2 lg:mt-0 lg:mb-5" size={25} />}
         />
       ) : (
         <LinkCustom
-          className="mb-11 text-gray-200"
+          className="mt-5 mb-11 text-gray-200 lg:mt-0"
           href="/"
           text="Voltar"
           icon={<CaretLeftIcon size={20} />}

@@ -1,9 +1,8 @@
-import { getServerSession } from 'next-auth'
-
 import { prisma } from '@/lib/prisma'
 
 import { authOptions } from '@/lib/auth/auth'
 import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
 
 export async function GET(request: Request) {
   try {
@@ -56,7 +55,7 @@ export async function GET(request: Request) {
       const bookAvgRating = booksAvgRating.find(
         (avgRating) => avgRating.book_id === book.id,
       )
-      const { ratings, ...bookInfo } = book
+      const { ratings /* ...bookInfo */ } = book
 
       return {
         ...book,

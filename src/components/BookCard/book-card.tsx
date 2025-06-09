@@ -26,7 +26,7 @@ export function BookCard({ book, size = 'md' }: BookCardProps) {
 
   return (
     <RatingsDialog bookId={book?.id}>
-      <div className="relative flex cursor-pointer gap-5 overflow-hidden rounded-lg border-1 border-solid border-gray-900 bg-gray-900 px-5 py-4 hover:border-gray-600">
+      <div className="relative flex cursor-pointer gap-5 overflow-hidden rounded-lg border-1 border-solid border-gray-900 bg-gray-900 p-3 hover:border-gray-600 lg:px-5 lg:py-4">
         {book?.alreadyRead && (
           <span className="absolute top-0 right-0 block rounded-[0px_4px_0px_4px] bg-[#0a313c] px-3 py-1 text-xs font-bold text-green-300">
             LIDO

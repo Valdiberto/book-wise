@@ -6,6 +6,7 @@ import { Book, Rating, User } from '@prisma/client'
 import { getRelativeTimeString } from '@/utils/getRelativeTimeString'
 import { useToggleShowMore } from '@/hooks/useToggleShowMore'
 import { tv } from 'tailwind-variants'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 export type RatingWithAuthorAndBook = Rating & {
   user: User
@@ -18,7 +19,7 @@ type ReviewCardProps = {
 }
 
 const card = tv({
-  base: 'flex w-full flex-col rounded-lg bg-gray-900 p-6',
+  base: 'flex lg:w-full flex-col rounded-lg bg-gray-900 p-3 lg:p-6',
   variants: {
     variant: {
       default: 'bg-gray-900',
@@ -27,9 +28,9 @@ const card = tv({
   },
 })
 
-const MAX_SUMMARY_LENGTH = 180
-
 export function ReviewCard({ rating, variant = 'default' }: ReviewCardProps) {
+  const isMobile = useIsMobile()
+  const MAX_SUMMARY_LENGTH = isMobile ? 80 : 180
   const summary = rating && rating.book ? rating.book.summary || '' : ''
   const {
     text: bookSummary,
@@ -49,7 +50,7 @@ export function ReviewCard({ rating, variant = 'default' }: ReviewCardProps) {
   return (
     <div className={card({ variant })}>
       {variant === 'default' && (
-        <div className="mb-8 flex items-start justify-between">
+        <div className="mb-4 flex items-start justify-between lg:mb-8">
           <section className="flex items-center gap-4">
             <Link href={`/profile/${rating.user_id}`}>
               <Avatar
@@ -90,7 +91,7 @@ export function ReviewCard({ rating, variant = 'default' }: ReviewCardProps) {
             <h1 className="font-bold text-gray-100">{rating.book.name}</h1>
             <p className="text-sm text-gray-400"> {rating.book.author}</p>
           </div>
-          <p className="mt-5 text-sm text-gray-300">
+          <p className="mt-5 text-sm text-gray-300 lg:block">
             {bookSummary}
             {(rating.book.summary?.length ?? 0) > MAX_SUMMARY_LENGTH && (
               <button
