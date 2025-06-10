@@ -9,7 +9,6 @@ export async function GET(
 ) {
   try {
     const { userId } = await context.params
-    console.log('user id log', userId)
 
     if (!userId) {
       return NextResponse.json(

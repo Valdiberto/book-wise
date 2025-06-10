@@ -27,7 +27,6 @@ export function ProfilePageClient() {
   const params = useParams()
 
   const userId = params.id as string
-  console.log('userid da pagina', userId)
 
   const { data: session } = useSession()
   const { data: profileData } = useQuery<ProfileData>({
@@ -40,8 +39,6 @@ export function ProfilePageClient() {
   })
 
   const profile = profileData
-
-  console.log('profileData', profile)
 
   const isOwnProfile = session?.user?.id === userId
 
