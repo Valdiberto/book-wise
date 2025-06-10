@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": " prisma generate && next build",
     "start": "next start",
     "build:seed": "tsc --project tsconfig.seed.json",
     "seed": "npm run build:seed && npx prisma db seed",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "node prisma/dist/seed.js"
