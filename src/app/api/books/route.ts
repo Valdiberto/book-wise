@@ -21,6 +21,18 @@ type Book = {
   total_pages: number
 }
 
+type BookWithRatings = Awaited<
+  ReturnType<typeof prisma.book.findMany>
+>[number] & {
+  ratings: {
+    id: string
+    rate: number
+    description: string
+    created_at: Date
+    book_id: string
+    user_id: string
+  }[]
+}
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -68,7 +80,7 @@ export async function GET(request: Request) {
       userBooksIds = userBooks?.map((book: Book) => book.id)
     }
 
-    const booksWithAvgRating = books.map((book) => {
+    const booksWithAvgRating = books.map((book: BookWithRatings) => {
       const bookAvgRating = booksAvgRating.find(
         (avgRating: RatingGroupByResult) => avgRating.book_id === book.id,
       )
