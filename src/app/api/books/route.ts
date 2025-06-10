@@ -3,11 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth/auth'
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { Book, Rating } from '@prisma/client'
-
-type BookWithRatings = Book & {
-  ratings: Rating[]
-}
+import { Book } from '@prisma/client'
 
 type RatingGroupByResult = {
   book_id: string
@@ -16,18 +12,12 @@ type RatingGroupByResult = {
   }
 }
 
-type BookResponse = Book & {
-  ratings: number
-  avgRating: number
-  alreadyRead: boolean
-}
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const categoryId = searchParams.get('category')
 
-    const books = (await prisma.book.findMany({
+    const books = await prisma.book.findMany({
       where: {
         ...(categoryId
           ? {
@@ -42,7 +32,7 @@ export async function GET(request: Request) {
       include: {
         ratings: true,
       },
-    })) as BookWithRatings[]
+    })
 
     const booksAvgRating = await prisma.rating.groupBy({
       by: ['book_id'],
@@ -69,21 +59,19 @@ export async function GET(request: Request) {
       userBooksIds = userBooks?.map((book: Book) => book.id)
     }
 
-    const booksWithAvgRating: BookResponse[] = books.map(
-      (book: BookWithRatings) => {
-        const bookAvgRating = booksAvgRating.find(
-          (avgRating: RatingGroupByResult) => avgRating.book_id === book.id,
-        )
-        const { ratings /* ...bookInfo */ } = book
+    const booksWithAvgRating = books.map((book) => {
+      const bookAvgRating = booksAvgRating.find(
+        (avgRating: RatingGroupByResult) => avgRating.book_id === book.id,
+      )
+      const { ratings /* ...bookInfo */ } = book
 
-        return {
-          ...book,
-          ratings: ratings.length,
-          avgRating: bookAvgRating?._avg.rate || 0,
-          alreadyRead: userBooksIds.includes(book.id),
-        }
-      },
-    )
+      return {
+        ...book,
+        ratings: ratings.length,
+        avgRating: bookAvgRating?._avg.rate || 0,
+        alreadyRead: userBooksIds.includes(book.id),
+      }
+    })
 
     return NextResponse.json({ books: booksWithAvgRating })
   } catch (error) {
