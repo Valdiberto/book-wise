@@ -1,17 +1,9 @@
 import { prisma } from '@/lib/prisma'
+import { Book, Rating } from '@prisma/client'
 import { NextResponse } from 'next/server'
 
-type BookWithRatings = Awaited<
-  ReturnType<typeof prisma.book.findMany>
->[number] & {
-  ratings: {
-    id: string
-    rate: number
-    description: string
-    created_at: Date
-    book_id: string
-    user_id: string
-  }[]
+type BookWithRatings = Book & {
+  ratings: Rating[]
 }
 
 type RatingGroupByResult = {
