@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 BookWise
 
-## Getting Started
+Uma aplicação moderna para descoberta, avaliação e gestão de livros lidos. Construída com Next.js, TypeScript, Tailwind CSS e tecnologias modernas, o BookWise oferece uma experiência intuitiva e social para os amantes da leitura.
 
-First, run the development server:
+## 🚀 Demonstração
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[Confira a versão em produção](https://book-wise-theta.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Funcionalidades
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✅ Autenticação via Google or GitHub (OAuth)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✅ Descoberta de livros mais bem avaliados
 
-## Learn More
+✅ Avaliações com nota e descrição
 
-To learn more about Next.js, take a look at the following resources:
+✅ Perfil do usuário com histórico de leituras
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+✅ Página de detalhes com avaliação média e resenhas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+✅ Layout responsivo e acessível
 
-## Deploy on Vercel
+## 📸 Capturas de Tela
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![SignIn](public/image.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![Home](public/image2.png)
+
+![BookDetails](public/image-1.png)
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Next.js (App Router)**
+- **TypeScript**
+- **Tailwind CSS**
+- **React Hook Form**
+- **Zod**
+- **Radix UI**
+- **ShadCN/UI**
+- **NextAuth.js (com Google OAuth)**
+- **Prisma ORM**
+- **PostgreSQL**
+- **Vercel (para deploy)**
+
+## 📦 Como Começar
+
+Siga os passos abaixo para rodar o projeto localmente:
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Valdiberto/book-wise.git
+
+   ```
+2. Navegue até a pasta do projeto:
+
+   ```bash
+   cd book-wise
+
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   npm install
+
+   ```
+
+4. Configure as variáveis de ambiente:
+
+- Crie um arquivo `.env.local` com base no `.env.example`
+- Preencha as variáveis como `DATABASE_URL` e credenciais do Google OAuth
+
+  Exemplo:
+
+  ```ini
+  DATABASE_URL=postgresql://docker:docker@localhost:5432/bookwise
+  GOOGLE_CLIENT_ID=...
+  GOOGLE_CLIENT_SECRET=...
+  NEXTAUTH_URL=http://localhost:3000
+  ```
+
+5. Rode as migrações e seeds:
+
+   ```bash
+   npx prisma migrate dev
+   npm run seed
+
+   ```
+
+6. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+Acesse no navegador: http://localhost:3000
+
+## 🧪 Testes
+
+Este projeto ainda não possui testes automatizados. Sinta-se à vontade para contribuir com melhorias ou cobertura de testes.
+
+## 📁 Implantação
+
+O projeto está pronto para deploy na Vercel. Basta conectar seu repositório e implantar — nenhuma configuração adicional necessária.
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja LICENSE para mais detalhes.
+
+## 🙋 Autor
+
+Feito com 📚 por Valdiberto
