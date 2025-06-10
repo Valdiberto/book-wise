@@ -10,10 +10,10 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { RatingStars } from '../RatingStars/rating-stars'
 import { BookInfo } from './book-info'
-import { BookWithAvgRating } from '../BookCard/book-card'
 import { CategoriesOnBooks, Category } from '@prisma/client'
 import { RatingWithAuthor } from '../UserReviewCard/user-review-card'
 import { BookReviews } from '../BookReviews/book-reviews'
+import { BookWithAvgRating } from '@/@types/prisma'
 
 type BookDetails = BookWithAvgRating & {
   ratings: RatingWithAuthor[]

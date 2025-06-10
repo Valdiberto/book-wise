@@ -4,7 +4,8 @@ import { CaretRightIcon } from '@phosphor-icons/react'
 import { LinkCustom } from '../ui/link'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
-import { BookCard, BookWithAvgRating } from '../BookCard/book-card'
+import { BookCard } from '../BookCard/book-card'
+import { BookWithAvgRating } from '@/@types/prisma'
 
 export function PopularBooks() {
   const { data: popularBooks } = useQuery<BookWithAvgRating[]>({

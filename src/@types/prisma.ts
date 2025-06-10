@@ -10,3 +10,28 @@ export type RatingGroupByResult = {
     rate: number | null
   }
 }
+
+export type BookWithAvgRating = Book & {
+  avgRating: number
+  alreadyRead: boolean
+}
+
+export type RatingWithBook = {
+  book: {
+    total_pages: number
+    author: string
+    categories: {
+      category: {
+        name: string
+      }
+    }[]
+  }
+}
+
+export type UserProfile = {
+  id: string
+  avatar_url: string | null
+  name: string | null
+  created_at: Date
+  ratings: RatingWithBook[]
+}

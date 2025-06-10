@@ -1,26 +1,7 @@
+import { RatingWithBook, UserProfile } from '@/@types/prisma'
 import { prisma } from '@/lib/prisma'
 import { getMostFrequentString } from '@/utils/getMostFrequentString'
 import { NextResponse } from 'next/server'
-
-type RatingWithBook = {
-  book: {
-    total_pages: number
-    author: string
-    categories: {
-      category: {
-        name: string
-      }
-    }[]
-  }
-}
-
-type UserProfile = {
-  id: string
-  avatar_url: string | null
-  name: string | null
-  created_at: Date
-  ratings: RatingWithBook[]
-}
 
 export async function GET(
   request: Request,

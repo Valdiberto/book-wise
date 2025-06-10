@@ -1,6 +1,7 @@
 'use client'
 
-import { BookCard, BookWithAvgRating } from '@/components/BookCard/book-card'
+import { BookWithAvgRating } from '@/@types/prisma'
+import { BookCard } from '@/components/BookCard/book-card'
 import { PageTitle } from '@/components/page-title'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
