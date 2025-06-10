@@ -3,36 +3,9 @@ import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth/auth'
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
+import { Book } from '@prisma/client'
+import { BookWithRatings, RatingGroupByResult } from '@/@types/prisma'
 
-type RatingGroupByResult = {
-  book_id: string
-  _avg: {
-    rate: number | null
-  }
-}
-
-type Book = {
-  name: string
-  id: string
-  created_at: Date
-  author: string
-  summary: string
-  cover_url: string
-  total_pages: number
-}
-
-type BookWithRatings = Awaited<
-  ReturnType<typeof prisma.book.findMany>
->[number] & {
-  ratings: {
-    id: string
-    rate: number
-    description: string
-    created_at: Date
-    book_id: string
-    user_id: string
-  }[]
-}
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)

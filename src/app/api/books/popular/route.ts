@@ -1,13 +1,6 @@
-import { BookWithRatings } from '@/@types/prisma'
+import { BookWithRatings, RatingGroupByResult } from '@/@types/prisma'
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
-
-type RatingGroupByResult = {
-  book_id: string
-  _avg: {
-    rate: number | null
-  }
-}
 
 export async function GET() {
   try {
