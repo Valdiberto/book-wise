@@ -3,7 +3,6 @@ import { prisma } from '@/lib/prisma'
 import { authOptions } from '@/lib/auth/auth'
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { Book } from '@prisma/client'
 
 type RatingGroupByResult = {
   book_id: string
@@ -46,7 +45,7 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions)
 
     if (session) {
-      const userBooks = (await prisma.book.findMany({
+      const userBooks = await prisma.book.findMany({
         where: {
           ratings: {
             some: {
@@ -54,9 +53,9 @@ export async function GET(request: Request) {
             },
           },
         },
-      })) as Book[]
+      })
 
-      userBooksIds = userBooks?.map((book: Book) => book.id)
+      userBooksIds = userBooks?.map((book) => book.id)
     }
 
     const booksWithAvgRating = books.map((book) => {
