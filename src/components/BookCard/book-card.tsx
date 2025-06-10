@@ -1,7 +1,16 @@
-import { Book } from '@prisma/client'
 import Image from 'next/image'
 import { RatingStars } from '../RatingStars/rating-stars'
 import { RatingsDialog } from '../RatingsDialog/ratings-dialog'
+
+type Book = {
+  name: string
+  id: string
+  created_at: Date
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+}
 
 export type BookWithAvgRating = Book & {
   avgRating: number
