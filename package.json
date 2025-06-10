@@ -8,8 +8,7 @@
     "start": "next start",
     "build:seed": "tsc --project tsconfig.seed.json",
     "seed": "npm run build:seed && npx prisma db seed",
-    "lint": "next lint",
-    "postinstall": "prisma generate"
+    "lint": "next lint"
   },
   "prisma": {
     "seed": "node prisma/dist/seed.js"
