@@ -1,10 +1,6 @@
+import { BookWithRatings } from '@/@types/prisma'
 import { prisma } from '@/lib/prisma'
-import { Book, Rating } from '@prisma/client'
 import { NextResponse } from 'next/server'
-
-type BookWithRatings = Book & {
-  ratings: Rating[]
-}
 
 type RatingGroupByResult = {
   book_id: string
