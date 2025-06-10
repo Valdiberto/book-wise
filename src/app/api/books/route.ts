@@ -11,6 +11,16 @@ type RatingGroupByResult = {
   }
 }
 
+type Book = {
+  name: string
+  id: string
+  created_at: Date
+  author: string
+  summary: string
+  cover_url: string
+  total_pages: number
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -55,7 +65,7 @@ export async function GET(request: Request) {
         },
       })
 
-      userBooksIds = userBooks?.map((book) => book.id)
+      userBooksIds = userBooks?.map((book: Book) => book.id)
     }
 
     const booksWithAvgRating = books.map((book) => {
